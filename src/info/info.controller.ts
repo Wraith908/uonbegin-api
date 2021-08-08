@@ -14,21 +14,23 @@ export class InfoController {
 
   @Get()
   async all(@Query('page') page: number = 1) {
-    return await this.infoService.paginate(page, ['pictures']);
+    return await this.infoService.paginate(page);
   }
 
   @Post()
   async create(
     @Body() info: InfoCreateDto
   ): Promise<Info> {
-    const curr = this.infoService.create({info});
-
-    return this.infoService.create({info});
+    return this.infoService.create({
+      title: info.title,
+      body: info.body,
+      section: info.section
+    });
   }
 
   @Get(':id')
   async get(@Param('id') id: number) {
-    return this.infoService.findOne({id}, ['pictures']);
+    return this.infoService.findOne({id});
   }
 
   @Put(':id')
