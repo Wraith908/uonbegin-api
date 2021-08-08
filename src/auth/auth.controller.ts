@@ -31,8 +31,7 @@ export class AuthController {
       first_name: body.first_name,
       last_name: body.last_name,
       email: body.email,
-      password: hashed,
-      role: {id: 3}
+      password: hashed
     });
   }
 

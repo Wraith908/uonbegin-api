@@ -3,14 +3,13 @@ import { Info } from './models/info.entity';
 import { InfoCreateDto } from './models/info-create.dto';
 import { InfoUpdateDto } from './models/info-update.dto';
 import { InfoService } from './info.service';
-import { PictureService } from '../picture/picture.service';
+//import { PictureService } from '../picture/picture.service';
 import { Request } from 'express';
 
 @Controller('info')
 export class InfoController {
   constructor(
-    private infoService: InfoService,
-    private pictureService: PictureService
+    private infoService: InfoService
   ) {}
 
   @Get()
