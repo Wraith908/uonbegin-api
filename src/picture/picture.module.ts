@@ -5,9 +5,9 @@ import { PictureController } from './picture.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Picture])
-  ],
+//  imports: [
+    //TypeOrmModule.forFeature([Picture])
+//  ],
   providers: [PictureService],
   controllers: [PictureController],
   exports: [PictureService]

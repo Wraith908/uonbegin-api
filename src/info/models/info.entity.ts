@@ -9,7 +9,7 @@ export class Info {
   @Column({unique: true})
   title: string;
 
-  @Column()
+  @Column({length: 500})
   body: string;
 
   @Column()

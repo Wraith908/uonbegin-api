@@ -1,6 +1,6 @@
+import { Body, Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { Picture } from './models/picture.entity';
 import { PictureService } from './picture.service';
-import { Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -27,9 +27,10 @@ export class PictureController {
       }
     })
   }))
-  uploadFile(@UploadedFile() file) {
+  uploadFile(@UploadedFile() file, @Body() body) {
     return {
-      url: `http://localhost:8000/api/pictures/${file.path}`
+      url: `http://localhost:8000/api/pictures/${file.path}`,
+      body: body
     }
   }
 
