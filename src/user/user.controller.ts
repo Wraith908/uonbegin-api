@@ -3,7 +3,6 @@ import { BadRequestException, Body, Controller, ClassSerializerInterceptor, Dele
 import { User } from './models/user.entity';
 import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service';
-import { UserCreateDto } from './models/user-create.dto';
 import { UserUpdateDto } from './models/user-update.dto';
 import * as bcrypt from 'bcryptjs';
 import { Request } from 'express';
@@ -22,22 +21,9 @@ export class UserController {
     return await this.userService.paginate(page);
   }
 
-  @Post()
-  async create(@Body() body: UserCreateDto): Promise<User> {
-    const password = await bcrypt.hash('1234',12);
-
-    const {role_id, ...data} = body;
-
-    return this.userService.create({
-      ...data,
-      password,
-      role: {id: role_id}
-    });
-  }
-
   @Get(':id')
   async get(@Param('id') id: number) {
-    return this.userService.findOne({id}, ['role']);
+    return this.userService.findOne({id});
   }
 
   @Put('info')
@@ -78,12 +64,8 @@ export class UserController {
     @Param('id') id: number,
     @Body() body: UserUpdateDto
   ) {
-
-    const {role_id, ...data} = body;
-
     await this.userService.update(id,{
-      ...data,
-      role: {id: role_id}
+      body
     });
 
     return this.userService.findOne({id});
