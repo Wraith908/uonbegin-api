@@ -22,6 +22,7 @@ import { PictureModule } from './picture/picture.module';
     InfoModule,
     CommonModule,
     AuthModule,
-    PictureModule]
+    PictureModule
+  ]
 })
 export class AppModule {}
