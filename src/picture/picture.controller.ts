@@ -28,14 +28,11 @@ export class PictureController {
     })
   }))
   uploadFile(@UploadedFile() file, @Body() body) {
-    pictureService.create({
-      altText: body.altText,
-      image_ref: `http://localhost:8000/api/pictures/${file.path}`
-    })
-    return {
-      url: `http://localhost:8000/api/pictures/${file.path}`,
-      body: body
-    }
+
+    return this.pictureService.create({
+        altText: body.altText,
+        image_ref: `http://localhost:8000/api/pictures/${file.path}`
+      });
   }
 
   @Get('uploads/:path')
