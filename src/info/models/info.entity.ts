@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Picture } from '../../picture/models/picture.entity';
 
 @Entity('info')
@@ -15,11 +15,7 @@ export class Info {
   @Column()
   section: string;
 
-  @ManyToMany(() => Picture, {cascade: true})
-  @JoinTable({
-    name: 'info_pictures',
-    joinColumn: {name: 'info-id', referencedColumnName: 'id'},
-    inverseJoinColumn: {name: 'picture-id', referencedColumnName: 'id'}
-  })
-  pictures: Picture[];
+  @OneToOne(() => Picture)
+  @JoinColumn()
+  picture: Picture;
 }
