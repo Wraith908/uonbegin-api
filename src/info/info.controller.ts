@@ -37,7 +37,31 @@ export class InfoController {
   } */
   /*
   */
+
   @Post()
+  @UseInterceptors(FileInterceptor('image', {
+    storage: diskStorage({
+      destination: './uploads',
+      filename(_, file, callback) {
+        //This black magic makes a random name of 32 characters
+        const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+        return callback(null,`${randomName}${extname(file.originalname)}`);
+      }
+    })
+  }))
+  async createInfo(
+    @Body('info') info: Body,
+    @UploadedFile() file: File
+  ) {
+    return this.infoService.create({
+      title: info.title,
+      body: info.body,
+      section: info.section,
+      pictureURL: `http://localhost:8000/api/pictures/${file.path}`
+    })
+  }
+
+  @Post('staff')
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
       destination: './uploads',
@@ -50,16 +74,20 @@ export class InfoController {
   }))
   async createStaffInfo(
     @Body('staff-info') info: Body,
-    @UploadedFile()
+    @UploadedFile() file: File
   ) {
     return this.staffInfoService.create({
-      professorName: info.professorName,
-      position: info.position,
-      focusArea: info.focusArea,
-      room: info.room,
-      building: info.building,
-      location: info.location,
-      picture: `http://localhost:8000/api/pictures/${file.path}`
+      name: info.name,
+      about: info.about,
+      contact_email: info.contact_email,
+      contact_phone: info.contact_phone,
+      contact_mobile: info.contact_mobile,
+      contact_fax: info.contact_fax,
+      focus_area: info.focus_area,
+      office_room: info.office_room,
+      office_building: info.office_building,
+      office_location: info.office_location,
+      pictureURL: `http://localhost:8000/api/pictures/${file.path}`
     });
   }
 

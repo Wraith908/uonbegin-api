@@ -8,6 +8,9 @@ export class StaffInfo {
   @Column({unique: true})
   name: string;
 
+  @Column({length: 500})
+  about: string;
+
   @Column()
   contact_email: string;
 
@@ -22,7 +25,7 @@ export class StaffInfo {
 
   @Column()
   focus_area: string;
-  
+
   @Column()
   office_room: string;
 
@@ -31,9 +34,6 @@ export class StaffInfo {
 
   @Column()
   office_location: string;
-
-  @Column({length: 500})
-  about: string;
 
   @Column()
   pictureURL: string;
