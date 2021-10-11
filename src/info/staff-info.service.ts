@@ -7,7 +7,7 @@ import { AbstractService } from '../common/abstract.service';
 @Injectable()
 export class StaffInfoService extends AbstractService {
   constructor(
-    @InjectRepository(Info) private readonly staff/infoRepository: Repository<StaffInfo>
+    @InjectRepository(StaffInfo) private readonly staffInfoRepository: Repository<StaffInfo>
   ) {
     super(staffInfoRepository);
   }
