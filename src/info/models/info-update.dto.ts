@@ -5,4 +5,5 @@ export class InfoUpdateDto {
   title?: string;
   body?: string;
   section?: string;
+  pictureURL?: string;
 }

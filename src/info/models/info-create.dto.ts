@@ -10,4 +10,6 @@ export class InfoCreateDto {
 
   @IsNotEmpty()
   section: string;
+
+  pictureURL: string;
 }
