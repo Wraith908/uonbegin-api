@@ -5,6 +5,9 @@ export class InfoCreateDto {
   @IsNotEmpty()
   pictureURL: string;
 
+  @IsNotEmpty()
+  picture_name: string;
+
   alt_text: string;
 
   @IsNotEmpty()

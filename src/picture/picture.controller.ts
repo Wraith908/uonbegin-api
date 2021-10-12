@@ -8,6 +8,29 @@ export class PictureController {
   constructor(
     private pictureService: PictureService
   ) {
+    //Post calls
+    @Post()
+    @UseInterceptors(FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename(_, file, callback) {
+          //This black magic makes a random name of 32 characters
+          const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+          return callback(null,`${randomName}${extname(file.originalname)}`);
+        }
+      })
+    }))
+    async createPicture(
+      @Body('info') info: Body,
+      @UploadedFile() file: File
+    ) {
+      return this.infoService.create({
+        alt_text: info.alt_text,
+        isStaff: info.isStaff,
+        pictureURL: `http://localhost:8000/api/pictures/${file.path}`
+      })
+    }
+
     //Getters
     @Get()
     async all(@Query('page') page: number = 1) {
@@ -29,7 +52,7 @@ export class PictureController {
       return this.pictureService.findOne({id});
    }
 
-   //
+   //Delete
    @Delete(':id')
    async delete(@Param('id') id: number) {
      return this.infoService.delete(id);
