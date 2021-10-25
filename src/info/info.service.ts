@@ -11,4 +11,19 @@ export class InfoService extends AbstractService {
   ) {
     super(infoRepository);
   }
+
+  async paginate(page: number = 1, relations: any[] = []): Promise<{data: any[], meta: {total: number, page: number, last_page: number}}> {
+    const {data, meta} = await super.paginate(page, relations);
+
+    return {
+      data: data.map((info: Info) => ({
+        id: info.id,
+        title: info.title,
+        body: info.body,
+        section: info.section,
+        picture: info.picture
+      })),
+      meta
+    }
+  }
 }

@@ -1,4 +1,5 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Picture } from "../../picture/models/picture.entity";
 
 @Entity('info')
 export class Info {
@@ -14,6 +15,7 @@ export class Info {
   @Column()
   section: string;
 
-  @Column()
-  pictureURL: string;
+  @ManyToOne(() => Picture)
+  @JoinColumn({ referencedColumnName: "picture_id"})
+  picture: Picture;
 }

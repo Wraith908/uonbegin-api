@@ -8,7 +8,7 @@ export class Picture {
   //This should provide an easier way to find photos
   @Column()
   picture_name: string;
-
+  
   @Column({unique: true})
   pictureURL: string;
 

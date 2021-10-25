@@ -25,6 +25,7 @@ export class PictureController {
       @UploadedFile() file: File
     ) {
       return this.infoService.create({
+        picture_name: info.picture_name,
         alt_text: info.alt_text,
         isStaff: info.isStaff,
         pictureURL: `http://localhost:8000/api/pictures/${file.path}`

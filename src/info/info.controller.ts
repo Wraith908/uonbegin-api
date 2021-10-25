@@ -20,7 +20,7 @@ export class InfoController {
 
   @Get()
   async all(@Query('page') page: number = 1) {
-    return await this.infoService.paginate(page);
+    return await this.infoService.paginate(page,['pictures']);
   }
   /*
   @Post()
