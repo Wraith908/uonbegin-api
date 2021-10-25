@@ -1,9 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@nestjs/common';
 import { Info } from './models/info.entity';
-import { StaffInfo } from './models/staff-info.entity';
 import { InfoCreateDto } from './models/info-create.dto';
 import { InfoUpdateDto } from './models/info-update.dto';
 import { InfoService } from './info.service';
+import { StaffInfo } from './models/staff-info.entity';
+import { StaffInfoCreateDto } from './models/staff-info-create.dto';
+import { StaffInfoUpdateDto } from './models/staff-info-update.dto';
 import { StaffInfoService } from './staff-info.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -27,25 +29,11 @@ export class InfoController {
   async allStaff(@Query('page') page: number = 1) {
     return await this.staffInfoService.paginate(page,['pictures']);
   }
-  /*
-  @Post()
-  async create(
-    @Body('info') info: InfoCreateDto,
-    @Body('pictures') ids: number[]
-  ): Promise<Info> {
-    return this.infoService.create({
-      title: info.title,
-      body: info.body,
-      section: info.section,
-      pictures: ids.map(id => {id})
-    });
-  } */
-  /*
-  */
+
   //General info stuff
   @Post()
   async createInfo(
-    @Body('info') info: Body
+    @Body('info') info: InfoCreateDto
   ) {
     return this.infoService.create({
       title: info.title,
@@ -77,7 +65,7 @@ export class InfoController {
  //Staff info stuff
   @Post('staff')
   async createStaffInfo(
-    @Body('staff-info') info: Body
+    @Body('staff-info') info: StaffInfoCreateDto
   ) {
     return this.staffInfoService.create({
       name: info.name,
@@ -90,9 +78,27 @@ export class InfoController {
       office_room: info.office_room,
       office_building: info.office_building,
       office_location: info.office_location,
-      pictureURL: info.pictureURL
+      picture_id: info.picture_id
     });
   }
+  @Get('staff/:id')
+  async staffGet(@Param('id') id: number) {
+    return this.staffInfoService.findOne({id});
+  }
 
+  @Put('staff/:id')
+  async staffUpdate(
+    @Param('id') id: number,
+    @Body() body: StaffInfoUpdateDto
+  ) {
+    await this.staffInfoService.update(id, body);
+
+    return this.staffInfoService.findOne({id});
+  }
+
+  @Delete('staff/:id')
+  async staffDelete(@Param('id') id: number) {
+   return this.staffInfoService.delete(id);
+  }
 
 }

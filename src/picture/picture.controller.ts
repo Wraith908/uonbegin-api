@@ -1,15 +1,17 @@
-import { Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { Response } from "express";
 import { Picture } from "./models/picture.entity";
-import { PictureService } from "picture.service";
+import { PictureService } from "./picture.service";
+import { PictureCreateDto } from "./models/picture-create.dto";
+import { PictureUpdateDto } from "./models/picture-update.dto";
 
 
 @Controller('picture')
 export class PictureController {
-  constructor(private pictureService: PictureService)
+  constructor(private pictureService: PictureService) {}
     //Post calls
     @Post('upload')
     @UseInterceptors(FileInterceptor('image', {
@@ -21,12 +23,15 @@ export class PictureController {
       }
     })
   }))
-    uploadFile(@UploadedFile() file: File) {
-      return this.infoService.create({
+    uploadFile(
+      @UploadedFile() file,
+      @Body() info: PictureCreateDto
+    ) {
+      return this.pictureService.create({
         picture_name: info.picture_name,
         alt_text: info.alt_text,
         isStaff: info.isStaff,
-        pictureURL: `http://localhost:8000/api/picture/${file.path}`
+        pictureURL: `http://localhost:8000/api/picture/uploads/${file.path}`
       })
     }
 
@@ -44,7 +49,7 @@ export class PictureController {
     @Put(':id')
     async update(
       @Param('id') id: number,
-      @Body() body: InfoUpdateDto
+      @Body() body: Body
     ) {
       await this.pictureService.update(id, body);
 
@@ -54,7 +59,7 @@ export class PictureController {
    //Delete
    @Delete(':id')
    async delete(@Param('id') id: number) {
-     return this.infoService.delete(id);
+     return this.pictureService.delete(id);
    }
 
    //This sends back the picture
@@ -64,6 +69,5 @@ export class PictureController {
         @Res() res: Response
     ) {
         res.sendFile(path, {root: 'uploads'});
-    }
   }
 }

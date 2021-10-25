@@ -18,10 +18,10 @@ export class StaffInfoService extends AbstractService {
     return {
       data: data.map((staffInfo: StaffInfo) => ({
         id: staffInfo.id,
-        name: staffInfo.title,
-        about: staffInfo.body,
-        contact_email: staffInfo.section,
-        contact_phone: staffInfo.picture,
+        name: staffInfo.name,
+        about: staffInfo.about,
+        contact_email: staffInfo.contact_email,
+        contact_phone: staffInfo.contact_phone,
         contact_mobile: staffInfo.contact_mobile,
         contact_fax: staffInfo.contact_fax,
         focus_area: staffInfo.focus_area,

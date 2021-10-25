@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { AbstractService } from '../common/abstract.service';
 
 @Injectable()
-export class PictureRepository extends AbstractService {
+export class PictureService extends AbstractService {
   constructor(
     @InjectRepository(Picture) private readonly pictureRepository: Repository<Picture>
   ) {

@@ -6,11 +6,11 @@ export class Picture {
   id: number;
 
   //This should provide an easier way to find photos
-  @Column()
-  picture_name: string;
-  
   @Column({unique: true})
   pictureURL: string;
+
+  @Column()
+  picture_name: string;
 
   @Column({length: 30})
   alt_text: string;
