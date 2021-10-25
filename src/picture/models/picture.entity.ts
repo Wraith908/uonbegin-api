@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity('picture')
 export class Picture {
   @PrimaryGeneratedColumn()
-  id: number;
+  picture_id: number;
 
   //This should provide an easier way to find photos
   @Column({unique: true})
