@@ -31,7 +31,7 @@ export class PictureController {
         picture_name: info.picture_name,
         alt_text: info.alt_text,
         isStaff: info.isStaff,
-        pictureURL: `http://localhost:8000/api/picture/uploads/${file.path}`
+        pictureURL: `http://localhost:8000/api/picture/${file.path}`
       })
     }
 
