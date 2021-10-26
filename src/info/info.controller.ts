@@ -22,24 +22,23 @@ export class InfoController {
 
   @Get()
   async all(@Query('page') page: number = 1) {
-    return await this.infoService.paginate(page,['pictures']);
+    return await this.infoService.paginate(page,['picture']);
   }
 
   @Get('staff')
   async allStaff(@Query('page') page: number = 1) {
-    return await this.staffInfoService.paginate(page,['pictures']);
+    return await this.staffInfoService.paginate(page,['picture']);
   }
 
   //General info stuff
   @Post()
-  async createInfo(
-    @Body('info') info: InfoCreateDto
-  ) {
+  async createInfo(@Body() info: InfoCreateDto): Promise<Info> {
+
+    const { picture_id, ...data} = info;
+
     return this.infoService.create({
-      title: info.title,
-      body: info.body,
-      section: info.section,
-      pictureURL: info.pictureURL
+      ...data,
+      picture: {picture_id: picture_id}
     })
   }
   @Get(':id')

@@ -11,5 +11,5 @@ export class InfoCreateDto {
   @IsNotEmpty()
   section: string;
 
-  pictureURL: string;
+  picture_id: string;
 }

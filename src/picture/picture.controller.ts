@@ -38,7 +38,7 @@ export class PictureController {
     //Getters
     @Get()
     async all(@Query('page') page: number = 1) {
-      return await this.pictureService.paginate(page, ['picture']);
+      return await this.pictureService.paginate(page);
     }
     @Get(':id')
     async get(@Param('id') id: number) {
