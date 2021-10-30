@@ -4,6 +4,6 @@
 export class InfoUpdateDto {
   title?: string;
   body?: string;
-  section?: string;
+  section?: number;
   picture_id?: string;
 }

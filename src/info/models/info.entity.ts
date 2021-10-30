@@ -13,7 +13,11 @@ export class Info {
   body: string;
 
   @Column()
-  section: string;
+  section: number;
+  //Uni Service = 1
+  //Survival Pack = 2
+  //Uni Expectations = 3
+  //FAQS and Testimonials = 4
 
   @ManyToOne(() => Picture)
   @JoinColumn({ referencedColumnName: "picture_id"})

@@ -25,11 +25,6 @@ export class InfoController {
     return await this.infoService.paginate(page,['picture']);
   }
 
-  @Get('staff')
-  async allStaff(@Query('page') page: number = 1) {
-    return await this.staffInfoService.paginate(page,['picture']);
-  }
-
   //General info stuff
   @Post()
   async createInfo(@Body() info: InfoCreateDto): Promise<Info> {
@@ -62,27 +57,27 @@ export class InfoController {
  }
 
  //Staff info stuff
+ @Get('staff')
+ async allStaff(@Query('page') page: number = 1) {
+   return await this.staffInfoService.paginate(page,['picture']);
+ }
+
+ @Get('staff/:id')
+ async staffGet(@Param('id') id: number) {
+   return this.staffInfoService.findOne({id});
+ }
+
   @Post('staff')
   async createStaffInfo(
     @Body('staff-info') info: StaffInfoCreateDto
   ) {
+
+    const { picture_id, ...data} = info;
+
     return this.staffInfoService.create({
-      name: info.name,
-      about: info.about,
-      contact_email: info.contact_email,
-      contact_phone: info.contact_phone,
-      contact_mobile: info.contact_mobile,
-      contact_fax: info.contact_fax,
-      focus_area: info.focus_area,
-      office_room: info.office_room,
-      office_building: info.office_building,
-      office_location: info.office_location,
-      picture_id: info.picture_id
+      ...data,
+      picture: {picture_id: picture_id}
     });
-  }
-  @Get('staff/:id')
-  async staffGet(@Param('id') id: number) {
-    return this.staffInfoService.findOne({id});
   }
 
   @Put('staff/:id')
