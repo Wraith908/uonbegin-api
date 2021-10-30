@@ -14,7 +14,4 @@ export class Picture {
 
   @Column({length: 30})
   alt_text: string;
-
-  @Column()
-  isStaff: boolean;
 }
