@@ -13,7 +13,7 @@ export class Info {
   body: string;
 
   @Column()
-  section: number;
+  section_id: number;
   //Uni Service = 1
   //Survival Pack = 2
   //Uni Expectations = 3

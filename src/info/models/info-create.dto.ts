@@ -9,7 +9,7 @@ export class InfoCreateDto {
   body: string;
 
   @IsNotEmpty()
-  section: number;
+  section_id: number;
 
   picture_id: string;
 }
