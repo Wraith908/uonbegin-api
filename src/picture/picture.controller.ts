@@ -41,7 +41,7 @@ export class PictureController {
     }
     @Get(':id')
     async get(@Param('id') id: number) {
-      return this.pictureService.findOne({id});
+      return this.pictureService.findOne({picture_id: id});
     }
 
     //Update
