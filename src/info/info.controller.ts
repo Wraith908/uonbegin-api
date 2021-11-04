@@ -36,7 +36,13 @@ export class InfoController {
     @Param('id') id: number,
     @Body() body: InfoUpdateDto
   ) {
-    await this.infoService.update(id, body);
+
+    const {picture_id, ...data} = body;
+
+    await this.infoService.update(id, {
+      ...data,
+      picture: {picture_id}
+    });
 
     return this.infoService.findOne({id});
  }

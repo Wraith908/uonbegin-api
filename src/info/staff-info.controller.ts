@@ -7,7 +7,7 @@ import { Response } from 'express';
 import { Request } from 'express';
 
 @Controller('staff')
-export class InfoController {
+export class StaffController {
   constructor(private staffInfoService: StaffInfoService){}
   //Staff info stuff
   @Get('')
@@ -20,7 +20,7 @@ export class InfoController {
     return this.staffInfoService.findOne({id});
   }
 
-   @Post('')
+   @Post()
    async createStaffInfo(
      @Body() info: StaffInfoCreateDto
    ) {
@@ -38,7 +38,12 @@ export class InfoController {
      @Param('id') id: number,
      @Body() body: StaffInfoUpdateDto
    ) {
-     await this.staffInfoService.update(id, body);
+     const {picture_id, ...data} = body;
+     
+     await this.staffInfoService.update(id, {
+       ...data,
+       picture: {picture_id}
+     });
 
      return this.staffInfoService.findOne({id});
    }

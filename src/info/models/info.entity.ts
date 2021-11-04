@@ -20,7 +20,7 @@ export class Info {
   //FAQS and Testimonials = 4
   //University Places = 5
 
-  @OneToOne(() => Picture)
+  @OneToOne(() => Picture, {nullable: true})
   @JoinColumn({ referencedColumnName: "picture_id" })
   picture: Picture;
 }

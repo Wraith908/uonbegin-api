@@ -36,7 +36,7 @@ export class StaffInfo {
   @Column()
   office_location: string;
 
-  @ManyToOne(() => Picture)
+  @ManyToOne(() => Picture, {nullable: true})
   @JoinColumn({ referencedColumnName: "picture_id"})
   picture: Picture;
 }
