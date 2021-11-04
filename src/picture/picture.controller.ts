@@ -12,9 +12,9 @@ import { PictureUpdateDto } from "./models/picture-update.dto";
 @Controller('picture')
 export class PictureController {
   constructor(private pictureService: PictureService) {}
-    //Post calls
-    @Post('upload')
-    @UseInterceptors(FileInterceptor('image', {
+  //Post calls
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
       destination: './uploads',
       filename(_, file, callback) {

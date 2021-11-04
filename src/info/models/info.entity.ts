@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Picture } from "../../picture/models/picture.entity";
 
 @Entity('info')
@@ -18,8 +18,9 @@ export class Info {
   //Survival Pack = 2
   //Uni Expectations = 3
   //FAQS and Testimonials = 4
+  //University Places = 5
 
-  @ManyToOne(() => Picture)
-  @JoinColumn({ referencedColumnName: "picture_id"})
+  @OneToOne(() => Picture)
+  @JoinColumn({ referencedColumnName: "picture_id" })
   picture: Picture;
 }

@@ -9,9 +9,6 @@ export class StaffInfoCreateDto {
   about: string;
 
   @IsNotEmpty()
-  section: string;
-
-  @IsNotEmpty()
   contact_email: string;
 
   @IsNotEmpty()
@@ -35,5 +32,5 @@ export class StaffInfoCreateDto {
   @IsNotEmpty()
   office_location: string;
 
-  picture_id: number;
+  picture_id;
 }
