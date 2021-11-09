@@ -12,19 +12,18 @@ export class InfoController {
 
   @Get()
   async all(@Query('page') page: number = 1) {
-    return await this.infoService.paginate(page,['picture']);
+    return await this.infoService.paginate(page);
   }
 
   //General info stuff
   @Post()
-  async createInfo(@Body() info: InfoCreateDto): Promise<Info> {
-
-    const { picture_id, ...data} = info;
-
+  async createInfo(@Body() info: InfoCreateDto) {
     return this.infoService.create({
-      ...data,
-      picture: {picture_id: picture_id || null}
-    })
+      title: info.title,
+      body: info.body,
+      section_id: info.section_id,
+      image_url: info.image_url || null
+    });
   }
   @Get(':id')
   async get(@Param('id') id: number) {
@@ -36,12 +35,11 @@ export class InfoController {
     @Param('id') id: number,
     @Body() body: InfoUpdateDto
   ) {
-
-    const {picture_id, ...data} = body;
-
     await this.infoService.update(id, {
-      ...data,
-      picture: {picture_id}
+      title: body.title,
+      body: body.body,
+      section_id: body.section_id,
+      image_url: body.image_url || null
     });
 
     return this.infoService.findOne({id});

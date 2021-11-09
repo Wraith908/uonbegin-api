@@ -21,7 +21,7 @@ export class InfoService extends AbstractService {
         title: info.title,
         body: info.body,
         section_id: info.section_id,
-        picture: info.picture
+        image_url: info.image_url
       })),
       meta
     }

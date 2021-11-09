@@ -9,5 +9,5 @@ export class StaffInfoUpdateDto {
   office_room?: string;
   office_building?: string;
   office_location?: string;
-  picture_id?: string;
+  image_url?: string;
 }

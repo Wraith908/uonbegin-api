@@ -12,7 +12,7 @@ export class StaffController {
   //Staff info stuff
   @Get('')
   async allStaff(@Query('page') page: number = 1) {
-    return await this.staffInfoService.paginate(page,['picture']);
+    return await this.staffInfoService.paginate(page);
   }
 
   @Get(':id')
@@ -21,15 +21,19 @@ export class StaffController {
   }
 
    @Post()
-   async createStaffInfo(
-     @Body() info: StaffInfoCreateDto
-   ) {
-
-     const { picture_id, ...data} = info;
-
+   async createStaffInfo(@Body() staffInfo: StaffInfoCreateDto): Promise<StaffInfo> {
      return this.staffInfoService.create({
-       ...data,
-       picture: {picture_id: picture_id || null}
+       name: staffInfo.name,
+       about: staffInfo.about,
+       contact_email: staffInfo.contact_email,
+       contact_phone: staffInfo.contact_phone,
+       contact_mobile: staffInfo.contact_mobile,
+       contact_fax: staffInfo.contact_fax,
+       focus_area: staffInfo.focus_area,
+       office_room: staffInfo.office_room,
+       office_builing: staffInfo.office_building,
+       office_location: staffInfo.office_location,
+       image_url: staffInfo.image_url
      });
    }
 
@@ -38,11 +42,18 @@ export class StaffController {
      @Param('id') id: number,
      @Body() body: StaffInfoUpdateDto
    ) {
-     const {picture_id, ...data} = body;
-     
      await this.staffInfoService.update(id, {
-       ...data,
-       picture: {picture_id}
+       name: body.name,
+       about: body.about,
+       contact_email: body.contact_email,
+       contact_phone: body.contact_phone,
+       contact_mobile: body.contact_mobile,
+       contact_fax: body.contact_fax,
+       focus_area: body.focus_area,
+       office_room: body.office_room,
+       office_builing: body.office_building,
+       office_location: body.office_location,
+       image_url: body.image_url
      });
 
      return this.staffInfoService.findOne({id});

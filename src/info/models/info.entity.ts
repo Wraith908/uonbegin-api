@@ -1,12 +1,11 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Picture } from "../../picture/models/picture.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('info')
 export class Info {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({unique: true})
+  @Column({unique: true, default: ""})
   title: string;
 
   @Column({length: 500})
@@ -20,7 +19,6 @@ export class Info {
   //FAQS and Testimonials = 4
   //University Places = 5
 
-  @OneToOne(() => Picture, {nullable: true})
-  @JoinColumn({ referencedColumnName: "picture_id" })
-  picture: Picture;
+  @Column()
+  image_url: string;
 }

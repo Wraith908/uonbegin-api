@@ -28,7 +28,7 @@ export class StaffInfoService extends AbstractService {
         office_room: staffInfo.office_room,
         office_building: staffInfo.office_building,
         office_location: staffInfo.office_location,
-        picture: staffInfo.picture
+        image_url: staffInfo.image_url
       })),
       meta
     }
