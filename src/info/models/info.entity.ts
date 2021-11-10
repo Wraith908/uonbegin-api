@@ -8,7 +8,7 @@ export class Info {
   @Column({unique: true, default: ""})
   title: string;
 
-  @Column({length: 500})
+  @Column({length: 2000})
   body: string;
 
   @Column()
@@ -19,6 +19,6 @@ export class Info {
   //FAQS and Testimonials = 4
   //University Places = 5
 
-  @Column()
+  @Column({nullable: true})
   image_url: string;
 }

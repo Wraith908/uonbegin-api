@@ -31,7 +31,7 @@ export class StaffController {
        contact_fax: staffInfo.contact_fax,
        focus_area: staffInfo.focus_area,
        office_room: staffInfo.office_room,
-       office_builing: staffInfo.office_building,
+       office_building: staffInfo.office_building,
        office_location: staffInfo.office_location,
        image_url: staffInfo.image_url
      });
