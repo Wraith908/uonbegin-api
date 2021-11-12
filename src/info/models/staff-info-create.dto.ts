@@ -31,6 +31,4 @@ export class StaffInfoCreateDto {
 
   @IsNotEmpty()
   office_location: string;
-
-  image_url;
 }

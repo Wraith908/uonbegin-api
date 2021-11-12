@@ -27,8 +27,7 @@ export class StaffInfoService extends AbstractService {
         focus_area: staffInfo.focus_area,
         office_room: staffInfo.office_room,
         office_building: staffInfo.office_building,
-        office_location: staffInfo.office_location,
-        image_url: staffInfo.image_url
+        office_location: staffInfo.office_location
       })),
       meta
     }
@@ -60,8 +59,7 @@ export class StaffInfoService extends AbstractService {
         focus_area: staffInfo.focus_area,
         office_room: staffInfo.office_room,
         office_building: staffInfo.office_building,
-        office_location: staffInfo.office_location,
-        image_url: staffInfo.image_url
+        office_location: staffInfo.office_location
       })),
       meta: {
         total,

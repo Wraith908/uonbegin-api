@@ -34,7 +34,4 @@ export class StaffInfo {
 
   @Column()
   office_location: string;
-
-  @Column()
-  image_url: string;
 }

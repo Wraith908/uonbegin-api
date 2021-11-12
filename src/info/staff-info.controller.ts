@@ -31,7 +31,7 @@ export class StaffController {
 
   @UseGuards(AuthGuard)
    @Post()
-   async createStaffInfo(@Body() staffInfo: StaffInfoCreateDto): Promise<StaffInfo> {
+   async createStaffInfo(@Body() staffInfo: StaffInfoCreateDto) {
      return this.staffInfoService.create({
        name: staffInfo.name,
        about: staffInfo.about,
@@ -42,8 +42,7 @@ export class StaffController {
        focus_area: staffInfo.focus_area,
        office_room: staffInfo.office_room,
        office_building: staffInfo.office_building,
-       office_location: staffInfo.office_location,
-       image_url: staffInfo.image_url
+       office_location: staffInfo.office_location
      });
    }
 
@@ -62,9 +61,8 @@ export class StaffController {
        contact_fax: body.contact_fax,
        focus_area: body.focus_area,
        office_room: body.office_room,
-       office_builing: body.office_building,
-       office_location: body.office_location,
-       image_url: body.image_url
+       office_building: body.office_building,
+       office_location: body.office_location
      });
 
      return this.staffInfoService.findOne({id});
