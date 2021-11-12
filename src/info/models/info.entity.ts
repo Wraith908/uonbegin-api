@@ -16,8 +16,9 @@ export class Info {
   //Uni Service = 1
   //Survival Pack = 2
   //Uni Expectations = 3
-  //FAQS and Testimonials = 4
+  //FAQS = 4
   //University Places = 5
+  //Testimonials = 6
 
   @Column({nullable: true})
   image_url: string;

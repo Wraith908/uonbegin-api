@@ -1,21 +1,28 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { Info } from './models/info.entity';
 import { InfoCreateDto } from './models/info-create.dto';
 import { InfoUpdateDto } from './models/info-update.dto';
 import { InfoService } from './info.service';
 import { Response } from 'express';
 import { Request } from 'express';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('info')
 export class InfoController {
   constructor(private infoService: InfoService) {}
 
   @Get()
-  async all(@Query('page') page: number = 1) {
-    return await this.infoService.paginate(page);
+  async all() {
+    return await this.infoService.all();
+  }
+
+  @Get('section/:id')
+  async getSection(@Param('id') sectionId: number) {
+    return this.infoService.paginateFilterBySection(sectionId);
   }
 
   //General info stuff
+  @UseGuards(AuthGuard)
   @Post()
   async createInfo(@Body() info: InfoCreateDto) {
     return this.infoService.create({
@@ -30,6 +37,7 @@ export class InfoController {
     return this.infoService.findOne({id});
   }
 
+  @UseGuards(AuthGuard)
   @Put(':id')
   async update(
     @Param('id') id: number,
@@ -45,6 +53,7 @@ export class InfoController {
     return this.infoService.findOne({id});
  }
 
+ @UseGuards(AuthGuard)
  @Delete(':id')
  async delete(@Param('id') id: number) {
    return this.infoService.delete(id);
